@@ -39,6 +39,7 @@ public class Main {
         try {
             logger.debug("**** Reading the maze from file " + mazeFile);
             Maze m = new Maze(mazeFile);
+            m.printMaze();
             m.solveMaze();
             
         } catch(Exception e) {

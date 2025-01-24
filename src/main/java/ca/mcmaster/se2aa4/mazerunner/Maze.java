@@ -75,9 +75,16 @@ public class Maze {
     }
     public void printMaze (){
         for (int i = 0; i < rows; i++){
+            String line = "";
             for (int j = 0; j <cols; j++) {
-                logger.info(maze[i][j]);
+                if (maze[i][j] == positionType.empty){
+                    line += " ";
+                }
+                else{
+                    line += "#";
+                }
             }
+            logger.info(line);
         }
     }
 
