@@ -38,18 +38,9 @@ public class Main {
         logger.info("** Starting Maze Runner");
         try {
             logger.debug("**** Reading the maze from file " + mazeFile);
-            BufferedReader reader = new BufferedReader(new FileReader(mazeFile));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                for (int idx = 0; idx < line.length(); idx++) {
-                    if (line.charAt(idx) == '#') {
-                        logger.info("WALL ");
-                    } else if (line.charAt(idx) == ' ') {
-                        logger.info("PASS ");
-                    }
-                }
-                logger.info(System.lineSeparator());
-            }
+            Maze m = new Maze(mazeFile);
+            m.solveMaze();
+            
         } catch(Exception e) {
             logger.error("/!\\ An error has occured /!\\");
         }
