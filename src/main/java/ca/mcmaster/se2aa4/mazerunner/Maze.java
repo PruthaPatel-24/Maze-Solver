@@ -16,14 +16,12 @@ public class Maze {
     private int exitRow;
     private int rows; 
     private int cols;
-    private Character myCharacter;
     private boolean solved = false;
     private String solution = "";
 
     public Maze (String mazeFile){
         this.mazeFile = mazeFile;
         loadMaze();
-        myCharacter = new Character(entryRow);
     }
 
     public void loadMaze(){
@@ -97,17 +95,21 @@ public class Maze {
         }
     }
 
-    public void solveMaze(){
+    public void solveMaze(Character c){
         while (!solved){
-            if (maze[myCharacter.getXPos()][myCharacter.getYPos()+1] == positionType.empty){
-                myCharacter.moveForward();
+            if (maze[c.getXPos()][c.getYPos()+1] == positionType.empty){
+                c.moveForward();
                 solution += move.F;
             }
-            if (myCharacter.getXPos() == exitRow && myCharacter.getYPos() == cols -1){
+            if (c.getXPos() == exitRow && c.getYPos() == cols -1){
                 solved = true;
             }
         }
         logger.info(solution);
+    }
+
+    public int getEntryRow(){
+        return entryRow;
     }
 }
 
