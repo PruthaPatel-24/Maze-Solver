@@ -97,10 +97,19 @@ public class Maze {
 
     public void solveMaze(Character c){
         while (!solved){
-            if (maze[c.getXPos()][c.getYPos()+1] == positionType.empty){
-                c.moveForward();
-                solution += move.F;
+            if (c.canTurnLeft(maze)){
+                c.movePlayer(MovementType.turnLeft);
+                solution+="L";
+            }   
+            else if (c.canGoStraight(maze)){
+                c.movePlayer(MovementType.straight);
+                solution+="F";
             }
+            else{
+                c.movePlayer(MovementType.turnRight);
+                solution+="FRF";
+            }
+            
             if (c.getXPos() == exitRow && c.getYPos() == cols -1){
                 solved = true;
             }
@@ -111,7 +120,9 @@ public class Maze {
     public int getEntryRow(){
         return entryRow;
     }
+
 }
 
 enum positionType {wall, empty};
 enum move {F, L, R};
+enum MovementType {straight, turnRight, uTurn, turnLeft};

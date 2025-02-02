@@ -25,33 +25,37 @@ public class Character {
         return yPos;
     }
 
-    public void moveForward(){
-        yPos++;
+    public Direction getDirection (){
+        return direction; 
+    }
+    public int [][][] increments = // []->straight, turn etc. [] // what way you're facing  [] what numbers to add 
+    {
+        {{-1, 0}, {0, +1}, {+1, 0}, {0, -1}}, //move straight 
+        {{-1, +1}, {1, 1}, {1, -1}, {-1, -1}}, // right turn 
+        {{0, +2}, {+2, 0}, {0, -2}, {-2, 0}}, // u turn 
+        {{0, 0}, {0, 0}, {0, 0}, {0, 0}}  // left turn
+    };
+
+    public void movePlayer(MovementType m){
+        xPos = xPos + increments[m.ordinal()][direction.ordinal()][0];
+        yPos = yPos + increments[m.ordinal()][direction.ordinal()][1];
+
+        direction = Direction.values()[(direction.ordinal() + m.ordinal()) % Direction.values().length];
     }
 
-    public void turnCorner(){
-
-        if (direction == Direction.North){
-            xPos--;
-            yPos++;
-        }
-        else if (direction == Direction.East){
-            xPos++;
-            yPos++;
-        }
-        else if (direction == Direction.South){
-            xPos++;
-            yPos--;
-        }
-        else{
-            xPos--;
-            yPos--;
-        }
-
-        direction = Direction.values()[(direction.ordinal() + 1 ) % Direction.values().length];
-        
+    public boolean canTurnLeft(positionType [][] maze){
+        return (maze[xPos + increments[MovementType.straight.ordinal()][direction.ordinal()][0]]
+        [yPos + increments[MovementType.straight.ordinal()][direction.ordinal()][1]]
+        == positionType.wall);
     }
-    
+
+    public boolean canGoStraight(positionType [][] maze){
+        return (!canTurnLeft(maze) && 
+        maze[xPos+ increments[MovementType.straight.ordinal()][direction.ordinal()][0] + increments[MovementType.straight.ordinal()][(direction.ordinal()+1)%Direction.values().length][0]]
+        [yPos+ increments[MovementType.straight.ordinal()][direction.ordinal()][1] + increments[MovementType.straight.ordinal()][(direction.ordinal()+1)%Direction.values().length][1]]
+        == positionType.wall);
+    }
+
 }
 
 enum Direction {North, East, South, West};
