@@ -18,11 +18,12 @@ public class Path {
     }
 
     public String factorizedForm (String s){
+        if (s.equals("")){
+            return s;
+        }
         s = s.trim();
         String factorized = "";
-        if (s == ""){
-            return factorized;
-        }
+    
         char currentChar = s.charAt(0); 
         int instances = 0; 
         for (int i = 0; i < s.length(); i++){
@@ -75,6 +76,9 @@ public class Path {
 
     public String reverse (String originalString){
         StringBuilder reversed = new StringBuilder("");
+        if (originalString.equals("")){
+            return originalString;
+        }
         for (int i = originalString.length() - 1; i >= 0; i--){
             reversed.append(originalString.charAt(i));
         }
