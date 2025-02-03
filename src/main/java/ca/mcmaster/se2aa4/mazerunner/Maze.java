@@ -33,6 +33,7 @@ public class Maze {
             reader.close();
         }catch(Exception e) {
             logger.error("Unable to Load Maze");
+            System.exit(1);
         }
 
         rows = lines.size();

@@ -49,10 +49,11 @@ public class Main {
                     Character c = new Character(m.getEntryRow());
                     RightHandSolver solver = new RightHandSolver();
                     m.printMaze();
-                    logger.info(solver.solveMaze(c, m));
+                    System.out.println(solver.solveMaze(c, m));
                 }
             }catch(Exception e) {
                 logger.error("/!\\ An error has occured /!\\");
+                System.exit(1);
             }    
 
         }catch (ParseException e) {
