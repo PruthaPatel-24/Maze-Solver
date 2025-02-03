@@ -40,9 +40,10 @@ public class Main {
             logger.debug("**** Reading the maze from file " + mazeFile);
             Maze m = new Maze(mazeFile);
             Character c = new Character(m.getEntryRow());
+            RightHandSolver solver = new RightHandSolver();
 
             m.printMaze();
-            m.solveMaze(c);
+            logger.info(solver.solveMaze(c, m));
             
         } catch(Exception e) {
             logger.error("/!\\ An error has occured /!\\");

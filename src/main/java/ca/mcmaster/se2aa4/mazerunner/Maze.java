@@ -16,8 +16,6 @@ public class Maze {
     private int exitRow;
     private int rows; 
     private int cols;
-    private boolean solved = false;
-    private Path p = new Path();
 
     public Maze (String mazeFile){
         this.mazeFile = mazeFile;
@@ -95,32 +93,21 @@ public class Maze {
         }
     }
 
-    public void solveMaze(Character c){
-        while (!solved){
-            if (c.canTurnLeft(maze)){
-                c.movePlayer(MovementType.turnLeft);
-                p.addStep("L");
-            }   
-            else if (c.canGoStraight(maze)){
-                c.movePlayer(MovementType.straight);
-                p.addStep("F");
-            }
-            else{
-                c.movePlayer(MovementType.turnRight);
-                p.addStep("FRF");
-            }
-            
-            if (c.getXPos() == exitRow && c.getYPos() == cols -1){
-                solved = true;
-            }
-        }
-        logger.info(p.factoriedForm());
-    }
-
     public int getEntryRow(){
         return entryRow;
     }
 
+    public int getExitRow(){
+        return exitRow;
+    }
+
+    public int getCols(){
+        return cols;
+    }
+
+    public positionType [][] getMaze() {
+        return maze;
+    }
 }
 
 enum positionType {wall, empty};
