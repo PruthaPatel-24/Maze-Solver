@@ -13,7 +13,8 @@ public class Main {
     
     public static void main(String[] args) {
         Options options = new Options();
-        options.addOption("i", true, "Maxe File");
+        options.addOption("i", true, "Maze File");
+        options.addOption("p", true, "Path");
 
         CommandLineParser parser = new DefaultParser();
         String mazeFile = new String();
@@ -27,27 +28,39 @@ public class Main {
                 logger.error("No maze was uploaded.");
                 System.exit(1); //failure
             }
-            
-        }
-        catch (ParseException e) {
+
+            logger.info("** Starting Maze Runner");
+
+            try {
+                logger.debug("**** Reading the maze from file " + mazeFile);
+                Maze m = new Maze(mazeFile);
+
+                if (cmd.hasOption("p")){
+                    String pathToCheck = cmd.getOptionValue("p");
+                    Path p = new Path();
+                    if (p.isCorrectPath(pathToCheck, m)){
+                        System.out.println("correct path");
+                    }
+                    else{
+                        System.out.println("incorrect path");
+                    }
+                }
+                else{//solve maze for user 
+                    Character c = new Character(m.getEntryRow());
+                    RightHandSolver solver = new RightHandSolver();
+                    m.printMaze();
+                    logger.info(solver.solveMaze(c, m));
+                }
+            }catch(Exception e) {
+                logger.error("/!\\ An error has occured /!\\");
+            }    
+
+        }catch (ParseException e) {
             //something went wrong
             logger.error("Parsing failed.  Reason: " + e.getMessage());
             System.exit(1); //failure
         }
         
-        logger.info("** Starting Maze Runner");
-        //try {
-            logger.debug("**** Reading the maze from file " + mazeFile);
-            Maze m = new Maze(mazeFile);
-            Character c = new Character(m.getEntryRow());
-            RightHandSolver solver = new RightHandSolver();
-            Path p = new Path();
-            m.printMaze();
-            logger.info(solver.solveMaze(c, m));
-            
-        /*} catch(Exception e) {
-            logger.error("/!\\ An error has occured /!\\");
-        }*/
         logger.debug("**** Computing path");
         logger.debug("PATH NOT COMPUTED");
         logger.info("** End of MazeRunner");

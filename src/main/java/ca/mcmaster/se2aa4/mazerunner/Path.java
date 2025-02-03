@@ -4,38 +4,42 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.*;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 
 public class Path {
 
-    private String s = ""; //tracks canonical form
+    private String userPath = ""; //tracks canonical form
 
-    public void addStep (String step){
-        s += step;
+    public String getUserPath(){
+        return userPath;
     }
 
-    public String factoriedForm (){
-        String factoried = "";
+    public void addStep (String step){
+        userPath += step;
+    }
+
+    public String factorizedForm (String s){
+        String factorized = "";
         if (s == ""){
-            return factoried;
+            return factorized;
         }
         char currentChar = s.charAt(0); 
         int instances = 0; 
         for (int i = 0; i < s.length(); i++){
+            if (s.charAt(i) == ' '){
+                continue;
+            }
             if (s.charAt(i) == currentChar){
                 instances +=1;
             }
             else if (i != s.length()-1){
-                factoried += String.valueOf(instances) + currentChar + ' ';
+                factorized += String.valueOf(instances) + currentChar + ' ';
                 currentChar = s.charAt(i);
                 instances = 1; 
             }
         }
 
-        factoried += String.valueOf(instances) + currentChar + ' ';
-        return factoried;
+        factorized += String.valueOf(instances) + currentChar + ' ';
+        return factorized;
 
     }
 
@@ -75,4 +79,17 @@ public class Path {
         }
         return reversed.toString(); 
     }
+
+    public boolean isCorrectPath(String inputString, Maze m){
+        Character c = new Character(m.getEntryRow());
+        RightHandSolver solver = new RightHandSolver();
+        String inputFactorized = factorizedForm(canonicalForm(inputString));
+        String reverseFactorized = factorizedForm(reverse(canonicalForm(inputString)));
+        if (solver.solveMaze(c, m).equals(inputFactorized) || solver.solveMaze(c, m).equals(reverseFactorized)){
+            return true; 
+        }
+        return false;
+    }
+
+
 }

@@ -25,7 +25,7 @@ public class RightHandSolver implements MazeSolver {
                 solved = true;
             }
         }
-        return p.factoriedForm();
+        return p.factorizedForm(p.getUserPath());
     }
 
 
