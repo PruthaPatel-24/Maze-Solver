@@ -17,7 +17,7 @@ public class Maze {
     private int rows; 
     private int cols;
     private boolean solved = false;
-    private String solution = "";
+    private Path p = new Path();
 
     public Maze (String mazeFile){
         this.mazeFile = mazeFile;
@@ -99,22 +99,22 @@ public class Maze {
         while (!solved){
             if (c.canTurnLeft(maze)){
                 c.movePlayer(MovementType.turnLeft);
-                solution+="L";
+                p.addStep("L");
             }   
             else if (c.canGoStraight(maze)){
                 c.movePlayer(MovementType.straight);
-                solution+="F";
+                p.addStep("F");
             }
             else{
                 c.movePlayer(MovementType.turnRight);
-                solution+="FRF";
+                p.addStep("FRF");
             }
             
             if (c.getXPos() == exitRow && c.getYPos() == cols -1){
                 solved = true;
             }
         }
-        logger.info(solution);
+        logger.info(p.factoriedForm());
     }
 
     public int getEntryRow(){
