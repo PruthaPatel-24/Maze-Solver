@@ -76,54 +76,11 @@ public class Path {
     public boolean isCorrectPath(String inputString, Maze m){
 
         String inputCanonical = canonicalForm(inputString);
-        if (runThroughMaze(inputCanonical, m, Direction.East) || runThroughMaze(inputCanonical, m, Direction.West)){
+        Character c = new Character(m.getEntryRow());
+        if (c.runThroughMaze(inputCanonical, m, Direction.East) || c.runThroughMaze(inputCanonical, m, Direction.West)){
             return true;
         }
         return false;
     }
-
-    public boolean runThroughMaze (String s, Maze m, Direction startDirection){
-        s = s.trim();
-        Character c = new Character(m.getEntryRow());
-        c.setDirection(startDirection);
-
-        if (startDirection == Direction.West){
-            c.setXPos(m.getExitRow());
-            c.setYPos(m.getCols()-1);
-        }
-        
-        for (int i = 0; i< s.length(); i++){
-            char currMove = s.charAt(i);
-            if (currMove == 'L'){
-                c.movePlayer(MovementType.turnLeft);
-            }
-            else if (currMove == 'R'){
-                c.movePlayer(MovementType.turnRight);
-            }
-            else if (currMove == 'F'){
-                c.movePlayer(MovementType.straight);
-            }
-            else if (currMove == ' '){
-                continue;
-            }
-            else{
-                //invalid character in path solution entered by user 
-                return false; 
-            }
-            if (m.getMaze()[c.getXPos()][c.getYPos()] == positionType.wall){
-                //user has entered into a wall
-                return false;
-            }
-        }
-        if (startDirection == Direction.East && c.getXPos() == m.getExitRow() && c.getYPos() == m.getCols()-1){
-            return true; 
-        }
-        else if (startDirection == Direction.West && c.getXPos() == m.getEntryRow() && c.getYPos() == 0){
-            return true; 
-        }
-        return false;
-
-    }
-
 
 }

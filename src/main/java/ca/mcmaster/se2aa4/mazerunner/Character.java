@@ -25,14 +25,6 @@ public class Character {
         return yPos;
     }
 
-
-    public void setXPos(int i){
-        xPos = i;
-    }
-
-    public void setYPos(int i){
-        yPos = i;
-    }
     public Direction getDirection (){
         return direction; 
     }
@@ -68,6 +60,47 @@ public class Character {
         == positionType.wall);
     }
 
+    public boolean runThroughMaze (String s, Maze m, Direction startDirection){
+        s = s.trim();
+        setDirection(startDirection);
+
+        if (startDirection == Direction.West){
+            xPos = m.getExitRow();
+            yPos = m.getCols()-1;
+        }
+        
+        for (int i = 0; i< s.length(); i++){
+            char currMove = s.charAt(i);
+            if (currMove == 'L'){
+                movePlayer(MovementType.turnLeft);
+            }
+            else if (currMove == 'R'){
+                movePlayer(MovementType.turnRight);
+            }
+            else if (currMove == 'F'){
+                movePlayer(MovementType.straight);
+            }
+            else if (currMove == ' '){
+                continue;
+            }
+            else{
+                //invalid character in path solution entered by user 
+                return false; 
+            }
+            if (m.getMaze()[xPos][yPos] == positionType.wall){
+                //user has entered into a wall
+                return false;
+            }
+        }
+        if (startDirection == Direction.East && xPos == m.getExitRow() && yPos == m.getCols()-1){
+            return true; 
+        }
+        else if (startDirection == Direction.West && xPos == m.getEntryRow() && yPos == 0){
+            return true; 
+        }
+        return false;
+
+    }
 }
 
 enum Direction {North, East, South, West};
