@@ -67,4 +67,12 @@ public class Path {
         }
         return canonical.toString(); 
     }
+
+    public String reverse (String originalString){
+        StringBuilder reversed = new StringBuilder();
+        for (int i = originalString.length() - 1; i >= 0; i--){
+            reversed.append(originalString.charAt(i));
+        }
+        return reversed.toString(); 
+    }
 }
