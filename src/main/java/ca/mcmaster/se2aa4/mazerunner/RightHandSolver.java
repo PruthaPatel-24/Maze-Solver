@@ -8,22 +8,22 @@ public class RightHandSolver implements MazeSolver {
 
     public String solveMaze(Character c, Maze m){
         while (!solved){
-            if (c.canTurnLeft(m.getMaze())){
+            if (c.canTurnLeft(m.getMaze())){ //if wall in front, must turn left
                 c.movePlayer(MovementType.turnLeft);
-                p.addStep("L");
+                p.addStep(move.L.toString());
             }   
-            else if (c.canGoStraight(m.getMaze())){
+            else if (c.canGoStraight(m.getMaze())){ //if no wall in front & going straight would mean theres a wall on your right
                 c.movePlayer(MovementType.straight);
-                p.addStep("F");
+                p.addStep(move.F.toString());
             }
-            else{
+            else{ //turns the right corner 
                 c.movePlayer(MovementType.straight);
                 c.movePlayer(MovementType.turnRight);
                 c.movePlayer(MovementType.straight);
-                p.addStep("FRF");
+                p.addStep(move.F.toString() + move.R.toString() + move.F.toString());
             }
             
-            if (c.getXPos() == m.getExitRow() && c.getYPos() == m.getCols() - 1){
+            if (c.getXPos() == m.getExitRow() && c.getYPos() == m.getCols() - 1){ //if at exit position
                 solved = true;
             }
         }

@@ -29,10 +29,7 @@ public class Character {
         return direction; 
     }
 
-    public void setDirection(Direction d){
-        direction = d;
-    }
-    public int [][][] increments = // []->straight, turn etc. [] // what way you're facing  [] what numbers to add 
+    public int [][][] increments = // []->straight, turn etc. [] //-> direction  [] ->what numbers to add to coordinate to move
     {
         {{-1, 0}, {0, +1}, {+1, 0}, {0, -1}}, //move straight 
         {{0, 0}, {0, 0}, {0, 0}, {0, 0}}, // right turn 
@@ -60,10 +57,12 @@ public class Character {
         == positionType.wall);
     }
 
+    //takes path from inputted string s, and moves player accordingly
     public boolean runThroughMaze (String s, Maze m, Direction startDirection){
         s = s.trim();
-        setDirection(startDirection);
+        direction = startDirection;
 
+        //switch starting position to west end
         if (startDirection == Direction.West){
             xPos = m.getExitRow();
             yPos = m.getCols()-1;

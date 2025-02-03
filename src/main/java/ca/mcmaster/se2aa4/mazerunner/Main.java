@@ -13,8 +13,8 @@ public class Main {
     
     public static void main(String[] args) {
         Options options = new Options();
-        options.addOption("i", true, "Maze File");
-        options.addOption("p", true, "Path");
+        options.addOption("i", true, "Maze File"); //accepts maze 
+        options.addOption("p", true, "Path"); //accepts solution to verify
 
         CommandLineParser parser = new DefaultParser();
         String mazeFile = new String();
@@ -35,7 +35,7 @@ public class Main {
                 logger.debug("**** Reading the maze from file " + mazeFile);
                 Maze m = new Maze(mazeFile);
 
-                if (cmd.hasOption("p")){
+                if (cmd.hasOption("p")){ //verify solution if -p flag
                     String pathToCheck = cmd.getOptionValue("p");
                     Path p = new Path();
                     if (p.isCorrectPath(pathToCheck, m)){
@@ -45,7 +45,7 @@ public class Main {
                         System.out.println("incorrect path");
                     }
                 }
-                else{//solve maze for user 
+                else{ //no -p flag means solve maze for user 
                     Character c = new Character(m.getEntryRow());
                     RightHandSolver solver = new RightHandSolver();
                     m.printMaze();

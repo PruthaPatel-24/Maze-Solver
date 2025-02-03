@@ -27,15 +27,15 @@ public class Path {
         char currentChar = s.charAt(0); 
         int instances = 0; 
         for (int i = 0; i < s.length(); i++){
-            if (s.charAt(i) == ' '){
+            if (s.charAt(i) == ' '){//ignore spaces 
                 continue;
             }
             else if (s.charAt(i) == currentChar){
-                instances +=1;
+                instances +=1; //if repeating character, increment instance 
             }
-            else{
+            else{ //if new character, add number of instances and character to factorized path
                 factorized += String.valueOf(instances) + currentChar + ' ';
-                currentChar = s.charAt(i);
+                currentChar = s.charAt(i); 
                 instances = 1; 
             }
         }
@@ -51,6 +51,7 @@ public class Path {
 
         for (int i = 0; i < factorized.length(); i++){
             if (factorized.charAt(i) == 'F' || factorized.charAt(i) == 'R' || factorized.charAt(i)== 'L'){
+                //assuming only captical letters inputted by users are valid
                 int repetitions = 1; 
                 if (!currentDigit.toString().equals("")){
                     repetitions = Integer.parseInt(currentDigit.toString());
@@ -77,6 +78,7 @@ public class Path {
 
         String inputCanonical = canonicalForm(inputString);
         Character c = new Character(m.getEntryRow());
+        //try both the west to east and east to west paths
         if (c.runThroughMaze(inputCanonical, m, Direction.East) || c.runThroughMaze(inputCanonical, m, Direction.West)){
             return true;
         }

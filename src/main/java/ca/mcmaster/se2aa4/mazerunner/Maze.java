@@ -41,7 +41,7 @@ public class Maze {
         maze = new positionType[rows][cols]; 
         for (int i = 0; i < rows; i++){
             for (int j = 0; j < cols; j++) {
-                if (lines.get(i).length() <= j){
+                if (lines.get(i).length() <= j){ //line ends in empty positions 
                     while (j < cols){
                         maze[i][j] = positionType.empty; 
                         j++;
