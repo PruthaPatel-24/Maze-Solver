@@ -17,11 +17,13 @@ public class RightHandSolver implements MazeSolver {
                 p.addStep("F");
             }
             else{
+                c.movePlayer(MovementType.straight);
                 c.movePlayer(MovementType.turnRight);
+                c.movePlayer(MovementType.straight);
                 p.addStep("FRF");
             }
             
-            if (c.getXPos() == m.getExitRow() && c.getYPos() == m.getCols() -1){
+            if (c.getXPos() == m.getExitRow() && c.getYPos() == m.getCols() - 1){
                 solved = true;
             }
         }

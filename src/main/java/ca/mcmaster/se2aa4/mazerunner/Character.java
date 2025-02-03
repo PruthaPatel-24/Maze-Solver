@@ -25,13 +25,25 @@ public class Character {
         return yPos;
     }
 
+
+    public void setXPos(int i){
+        xPos = i;
+    }
+
+    public void setYPos(int i){
+        yPos = i;
+    }
     public Direction getDirection (){
         return direction; 
+    }
+
+    public void setDirection(Direction d){
+        direction = d;
     }
     public int [][][] increments = // []->straight, turn etc. [] // what way you're facing  [] what numbers to add 
     {
         {{-1, 0}, {0, +1}, {+1, 0}, {0, -1}}, //move straight 
-        {{-1, +1}, {1, 1}, {1, -1}, {-1, -1}}, // right turn 
+        {{0, 0}, {0, 0}, {0, 0}, {0, 0}}, // right turn 
         {{0, +2}, {+2, 0}, {0, -2}, {-2, 0}}, // u turn 
         {{0, 0}, {0, 0}, {0, 0}, {0, 0}}  // left turn
     };

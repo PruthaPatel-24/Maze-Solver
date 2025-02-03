@@ -33,7 +33,7 @@ public class Path {
             else if (s.charAt(i) == currentChar){
                 instances +=1;
             }
-            else if (i != s.length()-1){
+            else{
                 factorized += String.valueOf(instances) + currentChar + ' ';
                 currentChar = s.charAt(i);
                 instances = 1; 
@@ -58,7 +58,6 @@ public class Path {
                 for (int j = 0; j < repetitions; j++){
                         canonical.append(factorized.charAt(i));
                 }
-                canonical.append(" ");
                 currentDigit.replace(0, currentDigit.length(), ""); 
                 
             }
@@ -74,26 +73,56 @@ public class Path {
         return canonical.toString(); 
     }
 
-    public String reverse (String originalString){
-        StringBuilder reversed = new StringBuilder("");
-        if (originalString.equals("")){
-            return originalString;
+    public boolean isCorrectPath(String inputString, Maze m){
+
+        String inputCanonical = canonicalForm(inputString);
+        if (runThroughMaze(inputCanonical, m, Direction.East) || runThroughMaze(inputCanonical, m, Direction.West)){
+            return true;
         }
-        for (int i = originalString.length() - 1; i >= 0; i--){
-            reversed.append(originalString.charAt(i));
-        }
-        return reversed.toString(); 
+        return false;
     }
 
-    public boolean isCorrectPath(String inputString, Maze m){
+    public boolean runThroughMaze (String s, Maze m, Direction startDirection){
+        s = s.trim();
         Character c = new Character(m.getEntryRow());
-        RightHandSolver solver = new RightHandSolver();
-        String inputFactorized = factorizedForm(canonicalForm(inputString));
-        String reverseFactorized = factorizedForm(reverse(canonicalForm(inputString)));
-        if (solver.solveMaze(c, m).equals(inputFactorized) || solver.solveMaze(c, m).equals(reverseFactorized)){
+        c.setDirection(startDirection);
+
+        if (startDirection == Direction.West){
+            c.setXPos(m.getExitRow());
+            c.setYPos(m.getCols()-1);
+        }
+        
+        for (int i = 0; i< s.length(); i++){
+            char currMove = s.charAt(i);
+            if (currMove == 'L'){
+                c.movePlayer(MovementType.turnLeft);
+            }
+            else if (currMove == 'R'){
+                c.movePlayer(MovementType.turnRight);
+            }
+            else if (currMove == 'F'){
+                c.movePlayer(MovementType.straight);
+            }
+            else if (currMove == ' '){
+                continue;
+            }
+            else{
+                //invalid character in path solution entered by user 
+                return false; 
+            }
+            if (m.getMaze()[c.getXPos()][c.getYPos()] == positionType.wall){
+                //user has entered into a wall
+                return false;
+            }
+        }
+        if (startDirection == Direction.East && c.getXPos() == m.getExitRow() && c.getYPos() == m.getCols()-1){
+            return true; 
+        }
+        else if (startDirection == Direction.West && c.getXPos() == m.getEntryRow() && c.getYPos() == 0){
             return true; 
         }
         return false;
+
     }
 
 
