@@ -39,4 +39,32 @@ public class Path {
 
     }
 
+    public String canonicalForm(String factorized){
+        StringBuilder canonical = new StringBuilder();
+        StringBuilder currentDigit = new StringBuilder("");
+
+        for (int i = 0; i < factorized.length(); i++){
+            if (factorized.charAt(i) == 'F' || factorized.charAt(i) == 'R' || factorized.charAt(i)== 'L'){
+                int repetitions = 1; 
+                if (!currentDigit.toString().equals("")){
+                    repetitions = Integer.parseInt(currentDigit.toString());
+                }
+                for (int j = 0; j < repetitions; j++){
+                        canonical.append(factorized.charAt(i));
+                }
+                canonical.append(" ");
+                currentDigit.replace(0, currentDigit.length(), ""); 
+                
+            }
+            else if (factorized.charAt(i) >= '0' && factorized.charAt(i) <= '9'){
+                currentDigit.append(factorized.charAt(i));
+            }
+            else if (factorized.charAt(i) != ' '){
+                //"String inputted not a valid path";
+                System.exit(1);
+
+            }
+        }
+        return canonical.toString(); 
+    }
 }

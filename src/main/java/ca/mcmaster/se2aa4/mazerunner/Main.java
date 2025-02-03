@@ -36,18 +36,18 @@ public class Main {
         }
         
         logger.info("** Starting Maze Runner");
-        try {
+        //try {
             logger.debug("**** Reading the maze from file " + mazeFile);
             Maze m = new Maze(mazeFile);
             Character c = new Character(m.getEntryRow());
             RightHandSolver solver = new RightHandSolver();
-
+            Path p = new Path();
             m.printMaze();
             logger.info(solver.solveMaze(c, m));
             
-        } catch(Exception e) {
+        /*} catch(Exception e) {
             logger.error("/!\\ An error has occured /!\\");
-        }
+        }*/
         logger.debug("**** Computing path");
         logger.debug("PATH NOT COMPUTED");
         logger.info("** End of MazeRunner");
