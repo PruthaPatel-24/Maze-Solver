@@ -48,7 +48,6 @@ public class Main {
                 else{ //no -p flag means solve maze for user 
                     Character c = new Character(m.getEntryRow());
                     RightHandSolver solver = new RightHandSolver();
-                    m.printMaze();
                     System.out.println(solver.solveMaze(c, m));
                 }
             }catch(Exception e) {

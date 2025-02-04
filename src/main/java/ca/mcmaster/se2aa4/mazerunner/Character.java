@@ -29,7 +29,7 @@ public class Character {
         return direction; 
     }
 
-    public int [][][] increments = // []->straight, turn etc. [] //-> direction  [] ->what numbers to add to coordinate to move
+    private int [][][] increments = // []->straight, turn etc. [] //-> direction  [] ->what numbers to add to coordinate to move
     {
         {{-1, 0}, {0, +1}, {+1, 0}, {0, -1}}, //move straight 
         {{0, 0}, {0, 0}, {0, 0}, {0, 0}}, // right turn 
@@ -86,7 +86,10 @@ public class Character {
                 //invalid character in path solution entered by user 
                 return false; 
             }
-            if (m.getMaze()[xPos][yPos] == positionType.wall){
+            if (xPos < 0 || xPos >= m.getRows() || yPos < 0 || yPos >= m.getCols()){
+                return false; //gone out of bounds of the maze 
+            }
+            if (m.getMaze()[xPos][yPos] == positionType.wall ){
                 //user has entered into a wall
                 return false;
             }

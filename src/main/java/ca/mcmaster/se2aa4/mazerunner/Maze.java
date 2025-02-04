@@ -70,7 +70,7 @@ public class Maze {
             }
         }
     }
-    public void printMaze (){
+    /*public void printMaze (){
         for (int i = 0; i < rows; i++){
             String line = "";
             if (i == entryRow){
@@ -92,7 +92,7 @@ public class Maze {
             }
             logger.info(line);
         }
-    }
+    }*/
 
     public int getEntryRow(){
         return entryRow;
@@ -106,6 +106,9 @@ public class Maze {
         return cols;
     }
 
+    public int getRows(){
+        return rows;
+    }
     public positionType [][] getMaze() {
         return maze;
     }
