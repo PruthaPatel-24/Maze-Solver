@@ -116,4 +116,3 @@ public class Maze {
 
 enum positionType {wall, empty};
 enum move {F, L, R};
-enum MovementType {straight, turnRight, uTurn, turnLeft};
