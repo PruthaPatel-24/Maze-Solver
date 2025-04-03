@@ -1,7 +1,6 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.util.*;
 import org.apache.logging.log4j.LogManager;
@@ -115,4 +114,3 @@ public class Maze {
 }
 
 enum positionType {wall, empty};
-enum move {F, L, R};

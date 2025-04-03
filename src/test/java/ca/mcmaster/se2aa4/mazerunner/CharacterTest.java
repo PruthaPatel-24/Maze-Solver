@@ -17,17 +17,17 @@ public class CharacterTest {
     }
     @Test
     public void testMovePlayer() {
-        c.movePlayer(turnLeft);
+        c.movePlayer(L);
         assertEquals(North, c.getDirection());
-        c.movePlayer(turnLeft);
+        c.movePlayer(L);
         assertEquals(West, c.getDirection());
-        c.movePlayer(turnRight);
+        c.movePlayer(R);
         assertEquals(North, c.getDirection());
-        c.movePlayer(straight);
+        c.movePlayer(F);
         assertEquals(North, c.getDirection());
         c.movePlayer(uTurn);
         assertEquals(South, c.getDirection());
-        c.movePlayer(turnLeft);
+        c.movePlayer(L);
         assertEquals(East, c.getDirection());
     }
     
@@ -41,8 +41,4 @@ public class CharacterTest {
         assertEquals(false, c.canGoStraight(m.getMaze()));
     }
 
-    @Test
-    public void testRunThroughMaze(){
-        assertFalse(c.runThroughMaze("RLR", m, East));
-    }
 }

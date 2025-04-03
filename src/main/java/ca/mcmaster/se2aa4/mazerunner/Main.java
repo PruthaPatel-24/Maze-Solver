@@ -33,8 +33,8 @@ public class Main {
 
                 if (cmd.hasOption("p")){ //verify solution if -p flag
                     String pathToCheck = cmd.getOptionValue("p");
-                    Path p = new Path();
-                    if (p.isCorrectPath(pathToCheck, m)){
+                    PathRunner pathRunner = new PathRunner(m.getEntryRow());
+                    if (pathRunner.isCorrectPath(pathToCheck, m)){
                         System.out.println("correct path");
                     }
                     else{
@@ -42,9 +42,8 @@ public class Main {
                     }
                 }
                 else{ //no -p flag means solve maze for user 
-                    Character c = new Character(m.getEntryRow());
-                    RightHandSolver solver = new RightHandSolver();
-                    System.out.println(solver.solveMaze(c, m));
+                    RightHandSolver solver = new RightHandSolver(m.getEntryRow());
+                    System.out.println(solver.solveMaze(m));
                 }
             }catch(Exception e) {
                 logger.error("/!\\ An error has occured /!\\");

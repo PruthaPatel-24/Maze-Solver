@@ -1,20 +1,21 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.util.*;
 
-public class Path {
+public class Path extends Observer {
+
+    public Path(Character c){
+        this.subject = c;
+        subject.attach(this);
+    }
+
+    public Path(){
+    }
 
     private String userPath = ""; //tracks canonical form
 
     public String getUserPath(){
         return userPath;
-    }
-
-    public void addStep (String step){
-        userPath += step;
     }
 
     public String factorizedForm (String s){
@@ -74,15 +75,9 @@ public class Path {
         return canonical.toString(); 
     }
 
-    public boolean isCorrectPath(String inputString, Maze m){
 
-        String inputCanonical = canonicalForm(inputString);
-        Character c = new Character(m.getEntryRow());
-        //try both the west to east and east to west paths
-        if (c.runThroughMaze(inputCanonical, m, Direction.East) || c.runThroughMaze(inputCanonical, m, Direction.West)){
-            return true;
-        }
-        return false;
+    public void update (MovementType m){
+        userPath += m.toString();
     }
 
 }

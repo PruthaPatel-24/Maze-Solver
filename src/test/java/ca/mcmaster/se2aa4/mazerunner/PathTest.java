@@ -3,27 +3,25 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+import static ca.mcmaster.se2aa4.mazerunner.MovementType.*;
 public class PathTest {
     private Path p; 
-    private Maze m;
 
     @BeforeEach
      void initalizeForTesting(){
-        p = new Path();
-        m = new Maze("./examples/small.maz.txt");
+        p = new Path(new Character(8));
     }
 
     @Test
-    public void testAddStep() {
-        p.addStep("R");
+    public void testUpdate() { //used to be addStep function but refactored with observer design pattern
+        p.update(R);
         assertEquals("R", p.getUserPath());
-        p.addStep("F");
+        p.update(F);
         assertEquals("RF", p.getUserPath());
-        p.addStep("L");
+        p.update(L);
         assertEquals("RFL", p.getUserPath());
     }
-    
+
     @Test
     public void testFactorizedForm (){
         assertEquals("2R 2L 2F 1R 1L ",p.factorizedForm("RRLLFFRL"));
@@ -32,13 +30,6 @@ public class PathTest {
     @Test
     public void testCanonicalForm(){
         assertEquals("RRLLFFRL",p.canonicalForm("2R 2L 2F 1R 1L"));
-    }
-
-    @Test
-    public void testIsCorrectPath(){
-        assertFalse(p.isCorrectPath("RLR", m));
-        assertTrue(p.isCorrectPath("1F 1R 1F 2L 2F 1R 2F 1R 2F 2L 4F 1R 2F 1R 4F 2L 2F 1R 4F 1R 2F 1R 2F 2L 2F 1L 2F 1L 4F 1R 2F 1R 2F 2L 4F 1R 2F 1R 2F 2L 2F 1R 2F 1R 4F 1R 2F 1L 2F 1R 2F 1L 1F", m));
-
     }
     
 }
