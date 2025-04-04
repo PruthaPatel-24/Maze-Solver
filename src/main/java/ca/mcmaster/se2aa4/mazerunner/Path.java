@@ -1,4 +1,5 @@
 package ca.mcmaster.se2aa4.mazerunner;
+import static ca.mcmaster.se2aa4.mazerunner.CommandType.*;
 
 import java.io.BufferedReader;
 
@@ -75,9 +76,14 @@ public class Path extends Observer {
         return canonical.toString(); 
     }
 
-
-    public void update (MovementType m){
-        userPath += m.toString();
+    @Override
+    public void update(Command c, CommandType cType){
+        if (cType == execute){
+            userPath += c.getMType().toString();
+        }
+        else{
+            userPath = userPath.substring(0, userPath.length() - 1);
+        }
     }
 
 }

@@ -13,9 +13,9 @@ public abstract class Subject {
     public void detach(Observer observer) {
         observers.remove(observer);
     }
-    public void notifyAllObservers(MovementType m){
+    public void notifyAllObservers(Command c, CommandType cType){
         for (Observer observer : observers){
-            observer.update(m);
+            observer.update(c, cType);
         }
     }
 

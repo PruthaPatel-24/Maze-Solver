@@ -4,22 +4,32 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static ca.mcmaster.se2aa4.mazerunner.MovementType.*;
+import static ca.mcmaster.se2aa4.mazerunner.CommandType.*;
+
 public class PathTest {
     private Path p; 
+    private Character c; 
 
     @BeforeEach
      void initalizeForTesting(){
-        p = new Path(new Character(8));
+        c = new Character(8);
+        p = new Path(c);
     }
 
     @Test
     public void testUpdate() { //used to be addStep function but refactored with observer design pattern
-        p.update(R);
+        p.update(new MoveRightCommand(c), execute);
         assertEquals("R", p.getUserPath());
-        p.update(F);
+        p.update(new MoveForwardCommand(c), execute);
         assertEquals("RF", p.getUserPath());
-        p.update(L);
+        p.update(new MoveLeftCommand(c), execute);
         assertEquals("RFL", p.getUserPath());
+        p.update(new MoveLeftCommand(c), undo);
+        assertEquals("RF", p.getUserPath());
+        p.update(new MoveForwardCommand(c), execute);
+        assertEquals("RFF", p.getUserPath());
+        
+        
     }
 
     @Test

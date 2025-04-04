@@ -33,13 +33,13 @@ public class PathRunner {
         for (int i = 0; i< s.length(); i++){
             char currMove = s.charAt(i);
             if (currMove == 'L'){
-                c.movePlayer(MovementType.L);
+                c.executeCommand(new MoveLeftCommand(c));
             }
             else if (currMove == 'R'){
-                c.movePlayer(MovementType.R);
+                c.executeCommand(new MoveRightCommand(c));
             }
             else if (currMove == 'F'){
-                c.movePlayer(MovementType.F);
+                c.executeCommand(new MoveForwardCommand(c));
             }
             else if (currMove == ' '){
                 continue;

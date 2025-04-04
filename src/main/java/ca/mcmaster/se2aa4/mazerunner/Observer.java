@@ -4,6 +4,6 @@ public abstract class Observer {
 
     protected Subject subject; 
     
-    public abstract void update(MovementType m);
+    public abstract void update(Command c, CommandType cType);
 
 }
