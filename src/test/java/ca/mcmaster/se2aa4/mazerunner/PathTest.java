@@ -29,7 +29,6 @@ public class PathTest {
         p.update(new MoveForwardCommand(c), execute);
         assertEquals("RFF", p.getUserPath());
         
-        
     }
 
     @Test

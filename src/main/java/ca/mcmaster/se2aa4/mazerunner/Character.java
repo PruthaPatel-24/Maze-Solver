@@ -59,8 +59,13 @@ public class Character extends Subject {
     }
 
     public void undoCommand(Command command){
-        command.undo();
-        history.pop();
+
+        if (history.isEmpty()) return;
+
+        Command commandToUndo = history.pop();
+        if (commandToUndo != null) {
+            commandToUndo.undo();
+        }
         notifyAllObservers(command, undo);
     }
 
