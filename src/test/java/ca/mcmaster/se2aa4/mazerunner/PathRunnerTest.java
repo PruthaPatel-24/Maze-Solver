@@ -9,7 +9,7 @@ public class PathRunnerTest {
     private Maze m;
 
     @BeforeEach
-     void initalizeForTesting(){
+     void setUp(){
         pathRunner = new PathRunner(2);
         m = new Maze("./examples/straight.maz.txt");
     }

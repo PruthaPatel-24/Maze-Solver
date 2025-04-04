@@ -11,7 +11,7 @@ public class PathTest {
     private Character c; 
 
     @BeforeEach
-     void initalizeForTesting(){
+     void setUp(){
         c = new Character(8);
         p = new Path(c);
     }

@@ -9,7 +9,7 @@ public class RightHandSolverTest {
     private RightHandSolver rHS; 
 
     @BeforeEach
-    public void initalizeForTesting(){
+    public void setUp(){
         m  = new Maze("./examples/straight.maz.txt");
         rHS = new RightHandSolver(2);
     }

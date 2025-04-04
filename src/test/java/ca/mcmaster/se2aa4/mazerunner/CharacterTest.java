@@ -15,7 +15,7 @@ public class CharacterTest {
         this.m  = new Maze("./examples/small.maz.txt");     
     }
     @Test
-    public void testMovePlayer() {
+    public void testExecuteCommand() {
         System.out.println("before test move player");
         c.executeCommand(new MoveLeftCommand(c));
         assertEquals(North, c.getDirection());

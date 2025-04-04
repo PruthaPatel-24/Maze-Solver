@@ -9,7 +9,7 @@ public class MazeTest {
     private Maze m;
 
     @BeforeEach 
-    public void initalizeForTesting(){
+    public void setUp(){
         m  = new Maze("./examples/small.maz.txt");     
     }
 
